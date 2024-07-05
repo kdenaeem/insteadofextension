@@ -19,11 +19,7 @@ module.exports = {
             // Treat src/css/app.css as a global stylesheet
             {
                 test: /\app.css$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "postcss-loader",
-                ],
+                use: ["style-loader", "css-loader", "postcss-loader"],
             },
             // Load .module.css files as CSS modules
             {
@@ -38,6 +34,10 @@ module.exports = {
                     },
                     "postcss-loader",
                 ],
+            },
+            {
+                test: /\.(ttf|otf|eot|svg|woff(2)?)$/,
+                type: "asset/resource",
             },
         ],
     },

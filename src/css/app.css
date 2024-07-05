@@ -5,3 +5,18 @@
 body {
     @apply bg-gray-200;
 }
+
+@font-face {
+    font-family: 'PoliteType';
+    src: local('PoliteType'), url(../fonts/PoliteType.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.title {
+    font-family: 'PoliteType', sans-serif;
+    font-size: 2.5rem; /* Adjust the size as needed */
+    font-weight: bold; /* Optional: make the text bold */
+    text-align: center;
+    margin: 20px 0; /* Adjust the margin as needed */
+}

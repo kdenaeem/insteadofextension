@@ -1,0 +1,1 @@
+export { CurrentTab } from "./component";

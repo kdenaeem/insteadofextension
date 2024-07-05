@@ -3,6 +3,7 @@ import { Hello } from "@src/components/hello";
 import browser, { Tabs } from "webextension-polyfill";
 import { Scroller } from "@src/components/scroller";
 import css from "./styles.module.css";
+import { CurrentTab } from "@src/components/CurrentTab";
 
 // // // //
 
@@ -60,6 +61,7 @@ export function Popup() {
         <div className={css.popupContainer}>
             <div className="mx-4 my-4">
                 <Hello />
+                <CurrentTab />
                 <hr />
                 <Scroller
                     onClickScrollTop={() => {
