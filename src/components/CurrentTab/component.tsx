@@ -18,6 +18,7 @@ function extractDomainName(urlString: string): string | null {
 
 export function CurrentTab() {
     const [tabTitle, setTabTitle] = useState<any>("loading..");
+    const [favicon, setFavicon] = useState<string | null>(null);
 
     useEffect(() => {
         async function fetchTabTitle() {
@@ -36,21 +37,30 @@ export function CurrentTab() {
                     domain = extractedDomainName
                         ? extractedDomainName
                         : "Idling :/";
+                    const favicon = `http://www.google.com/s2/favicons?domain=${domain}.com`;
+                    setFavicon(favicon);
                 }
+
                 setTabTitle(domain);
             } catch (error) {
                 console.error("Error querying tabs: ", error);
                 setTabTitle("Error :/");
+                setFavicon(null);
             }
         }
-
         fetchTabTitle();
     });
 
     return (
         <div className="row">
-            <div className="col-lg-12 text-center">
-                <p className="title">Browsing {tabTitle}</p>
+            <div
+                className="col-lg-12 text-center ml-7"
+                style={{ display: "flex", gap: "4px" }}
+            >
+                <p className="browsing_text">Browsing {tabTitle}</p>
+                {favicon && (
+                    <img height="16" width="16" src={favicon} alt="Favicon" />
+                )}
             </div>
         </div>
     );

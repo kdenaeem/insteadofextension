@@ -1,54 +1,52 @@
 import React from "react";
-import { Hello } from "@src/components/hello";
+import { Title } from "@src/components/title";
 import browser, { Tabs } from "webextension-polyfill";
 import { Scroller } from "@src/components/scroller";
 import css from "./styles.module.css";
 import { CurrentTab } from "@src/components/CurrentTab";
+import {
+    BrowserRouter,
+    createBrowserRouter,
+    Navigate,
+    Route,
+    RouterProvider,
+    Routes,
+} from "react-router-dom";
 
-// // // //
+// const router = createBrowserRouter([
+//     {
+//         path: "/",
+//         element: (
+//             <div className={css.popupContainer}>
+//                 <div className="mx-4 my-4">
+//                     <Title />
+//                     <CurrentTab />
+//                 </div>
+//             </div>
+//         ),
+//     },
+// ]);
 
-// Scripts to execute in current tab
-const scrollToTopPosition = 0;
-const scrollToBottomPosition = 9999999;
-
-function scrollWindow(position: number) {
-    window.scroll(0, position);
+function HomePage() {
+    return (
+        <div className={css.popupContainer}>
+            <div className="mx-4 my-4">
+                <Title />
+                <CurrentTab />
+            </div>
+        </div>
+    );
 }
 
-/**
- * Executes a string of Javascript on the current tab
- * @param code The string of code to execute on the current tab
- */
-function executeScript(position: number): void {
-    // Query for the active tab in the current window
-    browser.tabs
-        .query({ active: true, currentWindow: true })
-        .then((tabs: Tabs.Tab[]) => {
-            // Pulls current tab from browser.tabs.query response
-            const currentTab: Tabs.Tab | number = tabs[0];
-
-            // Short circuits function execution is current tab isn't found
-            if (!currentTab) {
-                return;
-            }
-            const currentTabId: number = currentTab.id as number;
-
-            // Executes the script in the current tab
-            browser.scripting
-                .executeScript({
-                    target: {
-                        tabId: currentTabId,
-                    },
-                    func: scrollWindow,
-                    args: [position],
-                })
-                .then(() => {
-                    console.log("Done Scrolling");
-                });
-        });
+function TodoPage() {
+    return (
+        <div>
+            <div className="mx-4 my-4">
+                <div>hello there you are now on the second page</div>
+            </div>
+        </div>
+    );
 }
-
-// // // //
 
 export function Popup() {
     // Sends the `popupMounted` event
@@ -58,20 +56,14 @@ export function Popup() {
 
     // Renders the component tree
     return (
-        <div className={css.popupContainer}>
-            <div className="mx-4 my-4">
-                <Hello />
-                <CurrentTab />
-                <hr />
-                <Scroller
-                    onClickScrollTop={() => {
-                        executeScript(scrollToTopPosition);
-                    }}
-                    onClickScrollBottom={() => {
-                        executeScript(scrollToBottomPosition);
-                    }}
-                />
-            </div>
-        </div>
+        <React.StrictMode>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={<HomePage />} />
+                    <Route path="/todo" element={<TodoPage />} />
+                    <Route path="*" element={<Navigate to="/" />} />
+                </Routes>
+            </BrowserRouter>
+        </React.StrictMode>
     );
 }

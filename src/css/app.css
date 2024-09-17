@@ -13,10 +13,33 @@ body {
     font-style: normal;
 }
 
+@font-face {
+    font-family: 'DTGetaiGroteskDisplay-Black';
+    src: local('DTGetaiGroteskDisplay-Black'), url(../fonts/DTGetaiGroteskDisplay-Black.ttf) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Subjectivity-MediumSlanted';
+    src: local('Subjectivity-MediumSlanted'), url(../fonts/Subjectivity-MediumSlanted.otf) format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+    
+
 .title {
     font-family: 'PoliteType', sans-serif;
     font-size: 2.5rem; /* Adjust the size as needed */
     font-weight: bold; /* Optional: make the text bold */
     text-align: center;
     margin: 20px 0; /* Adjust the margin as needed */
+}
+
+.browsing_text {
+    font-family: 'Subjectivity-MediumSlanted';
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+
 }

@@ -4,7 +4,10 @@ module.exports = {
     theme: {
         extend: {},
         fontFamily: {
+            tropikal: ["Tropikal-Bold.otf"],
             "polite-type": ["PoliteType"],
+            "getai-type": ["DTGetaiGrotesk"],
+            "subjectivity-type": ["Subjectivity-MediumSlanted"],
         },
     },
     plugins: [],
